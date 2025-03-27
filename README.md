@@ -1,120 +1,232 @@
-# MagicScript - Automated Mouse and Keyboard Macro Tool
+# MagicScript
 
-MagicScript is a Windows application that automates mouse and keyboard actions after a period of idle time. It runs in the background with a system tray icon and allows you to create custom macro sequences.
+![MagicScript Logo](icon.ico)
+
+## Overview
+
+MagicScript is a powerful Windows automation tool that allows you to create and execute custom mouse and keyboard macros after a period of system idle time. Perfect for maintaining system activity, automating repetitive tasks, or simulating user presence.
 
 ## Features
 
-- Automatically runs macros after a configurable idle time
-- Supports various actions:
-  - Mouse movement:
-    - Specific coordinates
-    - Random in range
-    - Fully random
-    - Relative to current position
-    - Random range from current position
-  - Mouse clicks (left, right, middle)
-  - Mouse scrolling:
-    - Fixed amount
-    - Random in range
-  - Keyboard key presses
-  - Keyboard key combinations
+- **Idle Detection**: Automatically triggers macros after a customizable period of system inactivity
+- **Multiple Action Types**:
+  - Mouse movements (absolute, relative, or random positions)
+  - Mouse clicks (left, right, middle buttons with customizable click count)
+  - Mouse scrolling (fixed or random amounts)
+  - Keyboard key presses and key combinations
   - Wait/delay actions
-- Runs in the background with system tray icon
-- Single instance enforcement (prevents multiple copies running)
-- Optional random delays between actions
-- Option to run on Windows startup
-- Beautiful and easy-to-use interface
-- Configuration saved in JSON format
-- Minimize to tray functionality
-
-## Requirements
-
-- Windows operating system
-- Python 3.12 or higher
-- Required Python packages (see requirements.txt)
+- **Advanced Mouse Movement Options**:
+  - Specific coordinates
+  - Random position within a defined range
+  - Fully random position anywhere on screen
+  - Relative movement from current position
+  - Random range from current position (for natural-looking movements)
+- **Customizable Settings**:
+  - Adjustable idle detection threshold
+  - Random delays between actions
+  - Run on Windows startup option
+- **User-Friendly Interface**:
+  - Drag-and-drop action reordering
+  - System tray integration
+  - Action testing capabilities
+  - Visual action editor
 
 ## Installation
 
-1. Clone or download this repository
+### Prerequisites
+
+- Windows 10 or later
+- Python 3.7 or later
+
+### Method 1: Using the Executable (Recommended)
+
+1. Download the latest release from the [Releases](https://github.com/yourusername/MagicScript/releases) page
+2. Extract the ZIP file to your desired location
+3. Run `MagicScript.exe`
+
+### Method 2: From Source
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/MagicScript.git
+   cd MagicScript
+   ```
+
 2. Install the required dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-```
-pip install -r requirements.txt
-```
+3. Run the application:
+   ```
+   python magic_script.py
+   ```
 
-## Usage
+## Usage Guide
 
-### Running the Application
+### Getting Started
 
-Simply run the script:
+1. Launch MagicScript
+2. The application will start in the system tray
+3. Click the tray icon to open the main window
 
-```
-python magic_script.py
-```
+### Creating a Macro
 
-Or use the compiled executable if available.
-
-### Creating Macros
-
-1. Open the application
-2. Go to the "Actions" tab
-3. Click "Add Action" to add a new action to your macro
-4. Configure the action parameters
+1. In the "Actions" tab, click "Add Action"
+2. Select an action type from the dropdown menu
+3. Configure the action parameters
+4. Click "OK" to add the action to your macro
 5. Repeat to add more actions
-6. Drag and drop actions to reorder them
-7. Use "Test Action" or "Test All Actions" to verify your macro
+6. Use drag-and-drop to reorder actions as needed
 
-### Configuration
+### Action Types
 
-In the "Settings" tab, you can configure:
+#### Mouse Move
 
-- Idle time before macros run
-- Enable/disable macro automation
-- Random delay between actions
-- Run on Windows startup option
+Move the mouse cursor to different positions:
 
-### System Tray
+- **Specific Coordinates**: Move to exact X,Y screen coordinates
+- **Random in Range**: Move to a random position within specified X,Y ranges
+- **Fully Random**: Move to a completely random position on screen
+- **Relative to Current Position**: Move a fixed distance from current position
+- **Random Range from Current Position**: Move a random distance within specified ranges from current position
 
-The application runs in the system tray. Right-click the icon to:
+#### Mouse Click
 
-- Enable/disable macro automation
-- Show the main window
-- Quit the application
+Perform mouse clicks:
 
-Double-click the tray icon to open the main window.
+- Choose button type (left, right, middle)
+- Set number of clicks (1-10)
 
-### Minimize to Tray
+#### Mouse Scroll
 
-The application will minimize to the system tray instead of closing when you:
-- Click the close (X) button
-- Click the "Minimize to Tray" button in the Settings tab
+Scroll the mouse wheel:
 
-This allows the application to continue running in the background.
+- **Fixed Amount**: Scroll a specific number of clicks (positive = up, negative = down)
+- **Random in Range**: Scroll a random amount between specified minimum and maximum values
 
-## Building an Executable
+#### Key Press
 
-You can build a standalone executable using PyInstaller:
+Press a single keyboard key:
 
-```
-pyinstaller --onefile --windowed --icon=icon.ico magic_script.py
-```
+- Enter any key name (e.g., a, b, enter, space, tab)
 
-## License
+#### Key Combination
 
-This software is provided as-is with no warranty. Use at your own risk.
+Press multiple keys simultaneously:
+
+- Enter comma-separated key names (e.g., ctrl, alt, delete)
+
+#### Wait
+
+Pause between actions:
+
+- Set duration in seconds
+
+### Configuring Settings
+
+In the "Settings" tab:
+
+1. **Idle Detection**:
+   - Set the idle time threshold (in seconds)
+   - Enable/disable macro automation
+
+2. **Random Delay**:
+   - Enable/disable random delays between actions
+   - Set minimum and maximum delay range (in seconds)
+
+3. **General Settings**:
+   - Enable/disable run on Windows startup
+   - Minimize to tray option
+
+### Testing Your Macro
+
+- Select an action and click "Test Action" to test individual actions
+- Click "Test All Actions" to run through the entire macro sequence
+
+### Running in Background
+
+- Click "Minimize to Tray" to keep the application running in the background
+- The application will automatically execute your macro when the system has been idle for the specified time
+
+## Advanced Features
+
+### Natural Mouse Movements
+
+The "Random Range from Current Position" option creates more natural-looking mouse movements by:
+
+1. Keeping movements relative to the current cursor position
+2. Adding randomness within specified ranges
+3. Preventing large, unnatural jumps across the screen
+
+This is particularly useful for simulating human-like activity.
+
+### Random Delays
+
+Enable random delays between actions to:
+
+1. Create more natural timing patterns
+2. Avoid detection by monitoring systems
+3. Simulate realistic human interaction
 
 ## Troubleshooting
 
-- If the application doesn't start, check if another instance is already running
-- If actions don't work as expected, try testing them individually
-- Check the log file (magic_script.log) for error messages
+### Common Issues
 
-### Missing Tray Icon in Compiled Executable
+1. **Application not starting**:
+   - Ensure you have the correct permissions
+   - Check if another instance is already running (look in system tray)
 
-If the tray icon doesn't appear when running the compiled executable:
+2. **Actions not executing**:
+   - Verify that macro automation is enabled
+   - Check that the idle time threshold is set appropriately
+   - Ensure your actions are properly configured
 
-1. Make sure both `icon.ico` and `icon.png` files are in the same directory as the executable
-2. If the issue persists, try rebuilding with the provided `build.bat` script
-3. As a last resort, you can manually copy the icon files to the directory where the executable is located
+3. **Mouse/keyboard actions not working**:
+   - Some applications may block automated input
+   - Try running MagicScript as administrator
 
-The application includes a fallback mechanism that will create a simple blue circle icon with "MS" text if the icon files cannot be found.
+### Logs
+
+MagicScript creates a log file (`magic_script.log`) in the application directory. Check this file for detailed information if you encounter issues.
+
+## Building from Source
+
+### Creating an Executable
+
+You can create a standalone executable using PyInstaller:
+
+1. Install PyInstaller:
+   ```
+   pip install pyinstaller
+   ```
+
+2. Build the executable:
+   ```
+   pyinstaller --onefile --windowed --icon=icon.ico --add-data "icon.ico;." magic_script.py
+   ```
+
+3. The executable will be created in the `dist` directory
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [PyAutoGUI](https://pyautogui.readthedocs.io/) for mouse and keyboard automation
+- [PyQt6](https://www.riverbankcomputing.com/software/pyqt/) for the GUI framework
+
+---
+
+Created with ❤️ by [Your Name]

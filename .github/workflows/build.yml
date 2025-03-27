@@ -1,0 +1,63 @@
+name: Build MagicScript Executable
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+    
+    - name: Build executable with PyInstaller
+      run: |
+        pyinstaller --onefile --windowed --icon=icon.ico --add-data "icon.ico;." --name MagicScript magic_script.py
+    
+    - name: Create distribution package
+      run: |
+        mkdir MagicScript
+        copy dist\MagicScript.exe MagicScript\
+        copy icon.ico MagicScript\
+        copy README.md MagicScript\
+        copy USER_GUIDE.md MagicScript\
+        copy LICENSE MagicScript\
+        copy CHANGELOG.md MagicScript\
+        
+    - name: Create ZIP archive
+      run: |
+        powershell Compress-Archive -Path MagicScript -DestinationPath MagicScript.zip
+    
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: MagicScript
+        path: MagicScript.zip
+    
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/v')
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: MagicScript.zip
+        draft: false
+        prerelease: false
+        generate_release_notes: true
