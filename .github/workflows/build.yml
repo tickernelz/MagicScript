@@ -14,10 +14,10 @@ jobs:
     runs-on: windows-latest
     
     steps:
-    - uses: actions/checkout@v3
-    
+    - uses: actions/checkout@v4
+
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
         cache: 'pip'
@@ -47,7 +47,7 @@ jobs:
         powershell Compress-Archive -Path MagicScript -DestinationPath MagicScript.zip
     
     - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: MagicScript
         path: MagicScript.zip
@@ -55,7 +55,7 @@ jobs:
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/v')
       id: create_release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: MagicScript.zip
         draft: false
