@@ -6,9 +6,16 @@ MagicScript is a Windows application that automates mouse and keyboard actions a
 
 - Automatically runs macros after a configurable idle time
 - Supports various actions:
-  - Mouse movement (specific coordinates or random)
+  - Mouse movement:
+    - Specific coordinates
+    - Random in range
+    - Fully random
+    - Relative to current position
+    - Random range from current position
   - Mouse clicks (left, right, middle)
-  - Mouse scrolling
+  - Mouse scrolling:
+    - Fixed amount
+    - Random in range
   - Keyboard key presses
   - Keyboard key combinations
   - Wait/delay actions
@@ -18,6 +25,7 @@ MagicScript is a Windows application that automates mouse and keyboard actions a
 - Option to run on Windows startup
 - Beautiful and easy-to-use interface
 - Configuration saved in JSON format
+- Minimize to tray functionality
 
 ## Requirements
 
@@ -74,6 +82,14 @@ The application runs in the system tray. Right-click the icon to:
 - Quit the application
 
 Double-click the tray icon to open the main window.
+
+### Minimize to Tray
+
+The application will minimize to the system tray instead of closing when you:
+- Click the close (X) button
+- Click the "Minimize to Tray" button in the Settings tab
+
+This allows the application to continue running in the background.
 
 ## Building an Executable
 
